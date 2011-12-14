@@ -1,0 +1,18 @@
+{
+  "name": "Snapper",
+  "version": "1.0",
+  "description": "Eases RSI by snapping you mouse to the nearest clickable element.",
+  "browser_action": {
+    "default_icon": "icon.png"
+  },
+  "permissions": [
+    "http://api.flickr.com/"
+  ],
+  "content_scripts": [
+    {
+      "matches": ["http://*/*","https://*/*"],
+      "css": ["styles.css"],
+      "js": ["jquery-1.4.4.js", "snapper.js"]
+    }
+  ]
+}
