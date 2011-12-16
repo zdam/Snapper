@@ -1,3 +1,4 @@
+/*
 $('a').mouseenter(function(){
 	$(this).addClass('js-snapper-highlight');
 });
@@ -5,8 +6,8 @@ $('a').mouseenter(function(){
 $('a').mouseleave(function(){
 	$(this).removeClass('js-snapper-highlight');
 });
+*/
 
-/*
 function findIntersectors(t_x, t_y, intersectorsSelector) {
     var intersectors = [];
     $(intersectorsSelector).each(function() {
@@ -24,7 +25,7 @@ function findIntersectors(t_x, t_y, intersectorsSelector) {
 }
 
 var orig_link_color;
-$(document).mousemove(function(e) {
+$(document).mousemove(function(m) {
 
     var size = 64;
     var intersectors = findIntersectors([m.pageX - size, m.pageX + size], [m.pageY - size, m.pageY + size], 'a');
@@ -34,14 +35,14 @@ $(document).mousemove(function(e) {
     }
 
     var current = $('.js-current-link');
-    current.removeClass('current-link').css('color', orig_link_color);
-    //current.removeClass('js-current-link'); //.css('color', orig_link_color);
+    //current.removeClass('current-link').css('color', orig_link_color);
+    current.removeClass('js-current-link'); //.css('color', orig_link_color);
 
     if (intersectors.length > 0) {
-    	alert('linky');
+    	 
         orig_link_color = intersectors[0].css('color');
-        intersectors[0].css('color', 'red').addClass('current-link');
-        //intersectors[0].addClass('js-current-link');
+        //intersectors[0].css('color', 'red').addClass('current-link');
+        intersectors[0].addClass('js-current-link');
     }
 })
 .click(function() {
@@ -50,4 +51,3 @@ $(document).mousemove(function(e) {
         window.location.href = links[0].href;
 });
 
-*/
