@@ -10,7 +10,7 @@ $('a').mouseleave(function(){
 
 function findIntersectors(t_x, t_y, intersectorsSelector) {
     var intersectors = [];
-    $(intersectorsSelector).each(function() {
+    intersectorsSelector.each(function() {
         var $this = $(this);
         var thisPos = $this.offset();
         var i_x = [thisPos.left, thisPos.left + $this.outerWidth()]
@@ -24,26 +24,28 @@ function findIntersectors(t_x, t_y, intersectorsSelector) {
     return intersectors;
 }
 
-var orig_link_color;
+var eventFilter = 0;
 $(document).mousemove(function(m) {
 
-    var size = 64;
-    var intersectors = findIntersectors([m.pageX - size, m.pageX + size], [m.pageY - size, m.pageY + size], 'a');
-    while (size > 1 && intersectors.length > 1) {
-        size = size / 2;
-        intersectors = findIntersectors([m.pageX - size, m.pageX + size], [m.pageY - size, m.pageY + size], 'a');
+    eventFilter = eventFilter > 60000 ? 0 : eventFilter + 1; // ensure we never overflow
+    if(eventFilter % 3){ // only process every third mouse move messages
+
+        var currentSelector = $('a');
+        var size = 64;
+        var intersectors = findIntersectors([m.pageX - size, m.pageX + size], [m.pageY - size, m.pageY + size], currentSelector);
+        while (size > 1 && intersectors.length > 1) {
+            size = size / 2;
+            intersectors = findIntersectors([m.pageX - size, m.pageX + size], [m.pageY - size, m.pageY + size], currentSelector);
+        }
+
+        $('.js-current-link').removeClass('js-current-link'); 
+
+        if (intersectors.length > 0) {
+            intersectors[0].addClass('js-current-link');
+        }
+            
     }
 
-    var current = $('.js-current-link');
-    //current.removeClass('current-link').css('color', orig_link_color);
-    current.removeClass('js-current-link'); //.css('color', orig_link_color);
-
-    if (intersectors.length > 0) {
-    	 
-        orig_link_color = intersectors[0].css('color');
-        //intersectors[0].css('color', 'red').addClass('current-link');
-        intersectors[0].addClass('js-current-link');
-    }
 })
 .click(function() {
     var links = $('.js-current-link');
