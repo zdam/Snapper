@@ -1,1 +1,11 @@
 Snapper - a Chrome extension that highlights you closest clickable link
+
+
+To install:
+
+1. Grab the code
+2. Chrome -> Spanner -> Tools -> Extensions
+3. Click Developer Mode checkbox
+4. Click Load unpacked extension..
+5. Choose the Snapper folder
+6. Done
